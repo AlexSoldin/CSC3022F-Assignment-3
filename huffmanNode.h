@@ -10,35 +10,35 @@
 #ifndef _HNODE_CLASS_H
 #define _HNODE_CLASS_H
 
-using namespace SLDALE003::NODE{
+namespace SLDALE003{
+    
+        using namespace std;
 
-    using namespace std;
+        class HuffmanNode{
+            public:
+                char letter;
+                int frequency;
+                shared_ptr<HuffmanNode> left;
+                shared_ptr<HuffmanNode> right;
 
-    class HuffmanNode{
-        public:
-            char letter;
-            int frequency;
-            shared_ptr<HuffmanNode> left;
-            shared_ptr<HuffmanNode> right;
+                //Default Constructor
+                HuffmanNode(char l, int f);
 
-            // Default Constructor
-            HuffmanNode(char l, int f);
+                //Destructor
+                ~HuffmanNode();
 
-            // Destructor
-            ~HuffmanNode();
+                //Copy Constructor
+                HuffmanNode(const HuffmanNode & node);
 
-            //Copy Constructor
-            HuffmanNode(const HuffmanNode & node);
+                //Move Constructor
+                HuffmanNode(HuffmanNode && node);
 
-            //Move Constructor
-            HuffmanNode(HuffmanNode && node);
+                //Copy Assignment Operator
+                HuffmanNode & operator=(const HuffmanNode & node);
 
-            //Copy Assignment Operator
-            HuffmanNode & operator=(const HuffmanNode & node);
-
-            //Move Assignment Operator
-            HuffmanNode & operator=(HuffmanNode && node);
-    };
+                //Move Assignment Operator
+                HuffmanNode & operator=(HuffmanNode && node);
+        };
 
 }
 

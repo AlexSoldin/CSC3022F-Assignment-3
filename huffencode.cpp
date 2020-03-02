@@ -29,14 +29,14 @@ int main(int argc, char * argv[]){
     }
     input.close();
 
-    unordered_map<char, int> mapping;
+    unordered_map<char, int> map;
     for(const char &currentChar: charactersToMap){
-        mapping[currentChar]++;
+        map[currentChar]++;
     }
 
     /* Check contents of map */
-    cout << "Contents of Map\n";
-    for (auto instance : mapping){
+    cout << "Contents of Map\n----------------\n";
+    for (auto & instance : map){
         cout << instance.first << ": " << instance.second << endl; 
     }
 
