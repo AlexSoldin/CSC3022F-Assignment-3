@@ -21,7 +21,7 @@ using namespace SLDALE003::NODE{
             shared_ptr<HuffmanNode> left;
             shared_ptr<HuffmanNode> right;
 
-            // Default constructor
+            // Default Constructor
             HuffmanNode(char l, int f);
 
             // Destructor
@@ -33,10 +33,10 @@ using namespace SLDALE003::NODE{
             //Move Constructor
             HuffmanNode(HuffmanNode && node);
 
-            //Copy Assignment 
+            //Copy Assignment Operator
             HuffmanNode & operator=(const HuffmanNode & node);
 
-            //Move Assignment
+            //Move Assignment Operator
             HuffmanNode & operator=(HuffmanNode && node);
     };
 
