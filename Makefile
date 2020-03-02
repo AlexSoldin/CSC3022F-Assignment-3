@@ -1,12 +1,17 @@
-huffencode: volimage.o
-	g++ -o huffencode VolImage.cpp --std=c++11
+huffencode: huffencode.o
+	g++ -o huffencode huffencode.cpp --std=c++11
 
-volimage.o: VolImage.cpp
-	g++ -o volimage.o VolImage.cpp --std=c++11
+huffencode.o: huffencode.cpp
+	g++ -o huffencode.o huffencode.cpp --std=c++11
 
 clean: 
 	@rm -f *.o *.run
 
 #	./huffencode <inputFile><output file>
 run: huffencode
-	./huffencode brain_mri_raws/MRI -d 66 67 outputDiffMap
+	./huffencode inputFile outputFile
+
+test: tests
+	g++ -o tester.o tester.cpp --std=c++11
+	g++ -o tests tester.cpp --std=c++11
+	./tests
