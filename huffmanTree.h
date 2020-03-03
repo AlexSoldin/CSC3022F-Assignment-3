@@ -17,12 +17,7 @@
 
 struct compareFrequency{
     bool operator() (const SLDALE003::HuffmanNode& node1, const SLDALE003::HuffmanNode& node2){
-        if (node1.frequency > node2.frequency){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return node1.frequency > node2.frequency
     }
 };
 

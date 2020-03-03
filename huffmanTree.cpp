@@ -28,9 +28,21 @@ namespace SLDALE003{
 
     HuffmanTree::HuffmanTree(HuffmanTree && tree): mapping(move(tree.mapping)), root(move(tree.root)), myQueue(move(tree.myQueue)){};
 
-//     HuffmanTree & HuffmanTree::operator=(const HuffmanTree & tree);
+    HuffmanTree & HuffmanTree::operator=(const HuffmanTree & tree){
+        mapping = tree.mapping;
+        myQueue = tree.myQueue;
+        root = nullptr;
+        root = tree.root;
+        return *this;
+    }
 
-//     HuffmanTree & HuffmanTree::operator=(HuffmanTree && tree);
+    HuffmanTree & HuffmanTree::operator=(HuffmanTree && tree){
+        mapping = move(tree.mapping);
+        myQueue = move(tree.myQueue);
+        root = nullptr;
+        root = move(tree.root);
+        return *this;
+    }
 
 //     void HuffmanTree::buildTree();
 
