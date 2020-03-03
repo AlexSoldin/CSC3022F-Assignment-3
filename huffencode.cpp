@@ -35,7 +35,7 @@ int main(int argc, char * argv[]){
     }
 
     /* Check contents of map */
-    cout << "Contents of Map\n----------------\n";
+    cout << "Contents of Map\n-----------------\n";
     for (auto & instance : map){
         cout << instance.first << ": " << instance.second << endl; 
     }

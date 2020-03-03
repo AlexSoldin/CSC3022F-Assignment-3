@@ -11,20 +11,22 @@
 
 #include "huffmanTree.h"
 
-// namespace SLDALE003{
+namespace SLDALE003{
 
-//     using namespace std;
+    using namespace std;
 
-//     HuffmanTree::HuffmanTree(unordered_map<char, int> map){
-//         root = nullptr;
-//         mapping = map;
-//     }
+    HuffmanTree::HuffmanTree(unordered_map<char, int> map){
+        root = nullptr;
+        mapping = map;
+    }
 
-//     HuffmanTree::~HuffmanTree();
+    HuffmanTree::~HuffmanTree(){
+        root = nullptr;
+    }
 
-//     HuffmanTree::HuffmanTree(const HuffmanTree & tree);
+    HuffmanTree::HuffmanTree(const HuffmanTree & tree): mapping(tree.mapping), root(tree.root), myQueue(tree.myQueue){};
 
-//     HuffmanTree::HuffmanTree(HuffmanTree && tree);
+    HuffmanTree::HuffmanTree(HuffmanTree && tree): mapping(move(tree.mapping)), root(move(tree.root)), myQueue(move(tree.myQueue)){};
 
 //     HuffmanTree & HuffmanTree::operator=(const HuffmanTree & tree);
 
@@ -37,4 +39,4 @@
 //     void HuffmanTree::buildCodeTable(unordered_map<char, string> &map, shared_ptr<SLDALE003::HuffmanNode> r, string bitString);
 
 
-// }
+}

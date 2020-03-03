@@ -15,6 +15,17 @@
 #ifndef _HTREE_CLASS_H
 #define _HTREE_CLASS_H
 
+struct compareFrequency{
+    bool operator() (const SLDALE003::HuffmanNode& node1, const SLDALE003::HuffmanNode& node2){
+        if (node1.frequency > node2.frequency){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+};
+
 namespace SLDALE003{
     
     using namespace std;
@@ -22,6 +33,7 @@ namespace SLDALE003{
     class HuffmanTree{
         private:
             unordered_map<char, int> mapping;
+            priority_queue<::SLDALE003::HuffmanNode, vector<::SLDALE003::HuffmanNode>,::compareFrequency> myQueue;
 
         public:
             shared_ptr<::SLDALE003::HuffmanNode> root;
