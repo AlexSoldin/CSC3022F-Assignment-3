@@ -40,5 +40,8 @@ int main(int argc, char * argv[]){
         cout << instance.first << ": " << instance.second << endl; 
     }
 
+    ::SLDALE003::HuffmanTree hTree(map);
+    hTree.buildTree();
+
     return 0;
 }

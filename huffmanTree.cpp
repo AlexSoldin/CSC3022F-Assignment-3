@@ -50,11 +50,13 @@ namespace SLDALE003{
             myQueue.push(node);
         }
 
-        while(myQueue.size()>1){
+        while(myQueue.size()!=1){
             ::SLDALE003::HuffmanNode l = myQueue.top();
             myQueue.pop();
+
             ::SLDALE003::HuffmanNode r = myQueue.top();
             myQueue.pop();
+
             int combinedFrequency = l.frequency + r.frequency;
             insertNode(combinedFrequency, l, r);
         }
@@ -62,6 +64,7 @@ namespace SLDALE003{
         ::SLDALE003::HuffmanNode rootNode = myQueue.top();
         myQueue.pop();
         root = make_shared<::SLDALE003::HuffmanNode>(rootNode);
+        cout << "Huffman Tree Build Successful" << endl;
     }
 
     void HuffmanTree::insertNode(int i, ::SLDALE003::HuffmanNode l, SLDALE003::HuffmanNode r){
@@ -71,7 +74,7 @@ namespace SLDALE003{
         myQueue.push(toAddNode);
     }
 
-//     void HuffmanTree::buildCodeTable(unordered_map<char, string> &map, shared_ptr<SLDALE003::HuffmanNode> r, string bitString);
+//     void HuffmanTree::buildCodeTable(unordered_map<char, string> &map, shared_ptr<::SLDALE003::HuffmanNode> r, string bitString);
 
 
 }
