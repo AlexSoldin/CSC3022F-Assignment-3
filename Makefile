@@ -1,5 +1,5 @@
-huffencode.run: huffencode.o
-	g++ -o huffencode.run huffencode.cpp --std=c++11
+huffencode: huffencode.o
+	g++ -o huffencode huffencode.cpp --std=c++11
 
 huffencode.o: huffencode.cpp
 	g++ -o huffencode.o huffencode.cpp --std=c++11
@@ -8,10 +8,10 @@ clean:
 	@rm -f *.o *.run
 
 #	./huffencode <inputFile><output file>
-run: huffencode.run
+run: huffencode
 	./huffencode inputFileExample.txt outputFileExample.txt
 
-test: tests.run
+test: tests
 	g++ -o tester.o tester.cpp --std=c++11
-	g++ -o tests.run tester.cpp --std=c++11
+	g++ -o tests tester.cpp --std=c++11
 	./tests

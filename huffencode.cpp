@@ -12,6 +12,7 @@
 
 #include "huffmanNode.cpp"
 #include "huffmanTree.cpp"
+// #include "catch.hpp"
 
 using namespace std;
 
@@ -39,9 +40,22 @@ int main(int argc, char * argv[]){
     for (auto & instance : map){
         cout << instance.first << ": " << instance.second << endl; 
     }
+    cout << "\n";
 
     ::SLDALE003::HuffmanTree hTree(map);
     hTree.buildTree();
+    cout << "Huffman Tree Build Successful\n\n";
+
+    unordered_map<char, string> mapToCompress;
+    hTree.buildCodeTable(mapToCompress, hTree.root, "");
+    cout << "Code Table Build Successful\n\n";
+
+    /* Check contents of map */
+    cout << "Contents of Map to Compress\n---------------------------\n";
+    for (auto & instance : mapToCompress){
+        cout << "Character: " <<instance.first << " has bit string: " << instance.second << endl; 
+    }
+    cout << "\n";
 
     return 0;
 }
