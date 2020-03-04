@@ -44,7 +44,15 @@ namespace SLDALE003{
         return *this;
     }
 
-//     void HuffmanTree::buildTree();
+    void HuffmanTree::buildTree(){
+        for (auto & instance : mapping){
+            ::SLDALE003::HuffmanNode node(instance.first, instance.second);
+            myQueue.push(node);
+        }
+
+        
+
+    }
 
 //     void HuffmanTree::insertNode(int i, ::SLDALE003::HuffmanNode l, SLDALE003::HuffmanNode r);
 
