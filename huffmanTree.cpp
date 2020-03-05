@@ -46,34 +46,34 @@ namespace SLDALE003{
 
     void HuffmanTree::buildTree(){
         for (auto & instance : mapping){
-            ::SLDALE003::HuffmanNode node(instance.first, instance.second);
+            SLDALE003::HuffmanNode node(instance.first, instance.second);
             myQueue.push(node);
         }
 
         while(myQueue.size()!=1){
-            ::SLDALE003::HuffmanNode l = myQueue.top();
+            SLDALE003::HuffmanNode l = myQueue.top();
             myQueue.pop();
 
-            ::SLDALE003::HuffmanNode r = myQueue.top();
+            SLDALE003::HuffmanNode r = myQueue.top();
             myQueue.pop();
 
             int combinedFrequency = l.frequency + r.frequency;
             insertNode(combinedFrequency, l, r);
         }
 
-        ::SLDALE003::HuffmanNode rootNode = myQueue.top();
+        SLDALE003::HuffmanNode rootNode = myQueue.top();
         myQueue.pop();
-        root = make_shared<::SLDALE003::HuffmanNode>(rootNode);
+        root = make_shared<SLDALE003::HuffmanNode>(rootNode);
     }
 
-    void HuffmanTree::insertNode(int i, ::SLDALE003::HuffmanNode l, SLDALE003::HuffmanNode r){
-        ::SLDALE003::HuffmanNode toAddNode(0,i);
-        toAddNode.left = make_shared<::SLDALE003::HuffmanNode> (l);
-        toAddNode.right = make_shared<::SLDALE003::HuffmanNode> (r);
+    void HuffmanTree::insertNode(int i, SLDALE003::HuffmanNode l, SLDALE003::HuffmanNode r){
+        SLDALE003::HuffmanNode toAddNode(0,i);
+        toAddNode.left = make_shared<SLDALE003::HuffmanNode> (l);
+        toAddNode.right = make_shared<SLDALE003::HuffmanNode> (r);
         myQueue.push(toAddNode);
     }
 
-    void HuffmanTree::buildCodeTable(unordered_map<char, string> &map, shared_ptr<::SLDALE003::HuffmanNode> r, string bitString){
+    void HuffmanTree::buildCodeTable(unordered_map<char, string> &map, shared_ptr<SLDALE003::HuffmanNode> r, string bitString){
         string outputString = bitString;
 
         if((*r).letter!=0){

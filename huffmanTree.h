@@ -28,10 +28,10 @@ namespace SLDALE003{
     class HuffmanTree{
         private:
             unordered_map<char, int> mapping;
-            priority_queue<::SLDALE003::HuffmanNode, vector<::SLDALE003::HuffmanNode>,::compareFrequency> myQueue;
+            priority_queue<SLDALE003::HuffmanNode, vector<SLDALE003::HuffmanNode>,compareFrequency> myQueue;
 
         public:
-            shared_ptr<::SLDALE003::HuffmanNode> root;
+            shared_ptr<SLDALE003::HuffmanNode> root;
 
             //Default Constructor
             HuffmanTree(unordered_map<char, int> map);
@@ -53,9 +53,9 @@ namespace SLDALE003{
 
             void buildTree();
 
-            void insertNode(int i, ::SLDALE003::HuffmanNode l, ::SLDALE003::HuffmanNode r);
+            void insertNode(int i, SLDALE003::HuffmanNode l, SLDALE003::HuffmanNode r);
             
-            void buildCodeTable(unordered_map<char, string> &map, shared_ptr<::SLDALE003::HuffmanNode> r, string bitString);
+            void buildCodeTable(unordered_map<char, string> &map, shared_ptr<SLDALE003::HuffmanNode> r, string bitString);
 
             void writeCodeTableToFile(unordered_map<char, string> map, string outputBuffer, string outputFile);
 
