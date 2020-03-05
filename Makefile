@@ -4,7 +4,7 @@ huffencode: huffencode.o
 huffencode.o: huffencode.cpp
 	g++ -o huffencode.o huffencode.cpp --std=c++11
 
-clean:
+clean: 
 	@rm -f *.o *.run
 
 #	./huffencode <inputFile><output file>

@@ -86,5 +86,19 @@ namespace SLDALE003{
         }
     }
 
+    void HuffmanTree::writeCodeTableToFile(unordered_map<char, string> map, string outputBuffer, string outputFileName){
+        string path = "./Output/";
+        ofstream outputFile(path+outputFileName,ios::binary);
+        const char* bytes = outputBuffer.c_str();
+        outputFile.write(bytes, outputBuffer.length());
+        outputFile.close();
+
+        ofstream outputHeaderFile(path+outputFileName+".hdr");
+        outputHeaderFile << map.size() << "\n";
+        for(auto & instance: map){
+            outputHeaderFile << instance.first << " " << instance.second << "\n";
+        }
+        outputHeaderFile.close();
+    }
 
 }

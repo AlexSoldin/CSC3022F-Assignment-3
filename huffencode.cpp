@@ -35,10 +35,10 @@ int main(int argc, char * argv[]){
     }
 
     /* Check contents of map */
-    cout << "Contents of Map\n-----------------\n";
-    for (auto & instance : map){
-	cout << instance.first << ": " << instance.second << endl; 
-    }
+    // cout << "Contents of Map\n-----------------\n";
+    // for (auto & instance : map){
+	// cout << instance.first << ": " << instance.second << endl; 
+    // }
     cout << "\n";
 
     ::SLDALE003::HuffmanTree hTree(map);
@@ -49,12 +49,19 @@ int main(int argc, char * argv[]){
     hTree.buildCodeTable(mapToCompress, hTree.root, "");
     cout << "Code Table Build Successful\n\n";
 
-    // /* Check contents of map */
+    /* Check contents of map */
     // cout << "Bit Strings to Compress\n-------------------------------------\n";
     // for (auto & instance : mapToCompress){
     //     cout << "Character: " <<instance.first << " has bit string: " << instance.second << endl; 
     // }
     // cout << "\n";
+
+    string outputBuffer = "";
+    for(const char &currentChar : charactersToMap){
+        outputBuffer+=mapToCompress[currentChar];
+    }
+    hTree.writeCodeTableToFile(mapToCompress, outputBuffer, outputFile);
+    cout << "Save Successful\n\n";
 
     return 0;
 }
