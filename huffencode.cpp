@@ -61,7 +61,15 @@ int main(int argc, char * argv[]){
         outputBuffer+=mapToCompress[currentChar];
     }
     hTree.writeCodeTableToFile(mapToCompress, outputBuffer, outputFile);
-    cout << "Save Successful\n\n";
+    cout << "Output File Generation Successful\n\n";
+
+
+    double badCompression = hTree.returnRatio(outputBuffer.length(), charactersToMap.size());
+    cout << "Compression Ratio Without Bit Packing is: " << badCompression << "\n\n";
+
+    /* Extra Credit */
+
+    
 
     return 0;
 }

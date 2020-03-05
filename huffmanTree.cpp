@@ -101,4 +101,9 @@ namespace SLDALE003{
         outputHeaderFile.close();
     }
 
+    double HuffmanTree::returnRatio(int size1, int size2){
+        double ratio = double(size1)/double(size2);
+        return ratio;
+    }
+
 }

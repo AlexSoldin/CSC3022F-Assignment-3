@@ -19,7 +19,7 @@
 using namespace std;
 
 TEST_CASE("Methods Perform as Expected for Two Separate Test Files", "[ASSIGNMENT]"){
-    ifstream input1("test1.txt");
+    ifstream input1("./TestFiles/test1.txt");
     char character1;
     vector<char> charactersToMap1;
 
@@ -34,7 +34,7 @@ TEST_CASE("Methods Perform as Expected for Two Separate Test Files", "[ASSIGNMEN
         map1[c]++;
     }
 
-    ifstream input2("test2.txt");
+    ifstream input2("./TestFiles/test2.txt");
     char character2;
     vector<char> charactersToMap2;
 
