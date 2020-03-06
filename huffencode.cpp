@@ -31,7 +31,7 @@ int main(int argc, char * argv[]){
     input.close();
 
     unordered_map<char, int> map;
-    for(const char &currentChar: charactersToMap){
+    for(const char &currentChar : charactersToMap){
         map[currentChar]++;
     }
 
@@ -59,9 +59,9 @@ int main(int argc, char * argv[]){
 
     string outputBuffer = "";
     for(const char &currentChar : charactersToMap){
-        outputBuffer+=mapToCompress[currentChar];
+        outputBuffer += mapToCompress[currentChar];
     }
-    hTree.writeCodeTableToFile(mapToCompress, outputBuffer, outputFile);
+    hTree.writeCodeTableToFile(mapToCompress, outputBuffer, outputFile, outputPath);
 
     double badCompression = hTree.returnRatio(outputBuffer.length(), charactersToMap.size());
     cout << "Compression Ratio Without Bit Packing is: " << badCompression << "\n\n";
@@ -115,7 +115,7 @@ int main(int argc, char * argv[]){
     compressedInputHeader >> numberOfBitsIn;
     compressedInputHeader.close();
 
-    
+
 
     return 0;
 }

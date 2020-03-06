@@ -30,7 +30,7 @@ TEST_CASE("Methods Perform as Expected for Two Separate Test Files", "[ASSIGNMEN
     input1.close();
 
     unordered_map<char, int> map1;
-    for(const char &c: charactersToMap1){
+    for(const char &c : charactersToMap1){
         map1[c]++;
     }
 
@@ -45,7 +45,7 @@ TEST_CASE("Methods Perform as Expected for Two Separate Test Files", "[ASSIGNMEN
     input2.close();
 
     unordered_map<char, int> map2;
-    for(const char &c: charactersToMap2){
+    for(const char &c : charactersToMap2){
         map2[c]++;
     }
 
@@ -78,7 +78,7 @@ TEST_CASE("Methods Perform as Expected for Two Separate Test Files", "[ASSIGNMEN
             frequencyCount1 += instance.second;
         }
 
-        for(auto & instance: map2){
+        for(auto & instance : map2){
             frequencyCount2 += instance.second;
         }
 
@@ -102,5 +102,40 @@ TEST_CASE("Methods Perform as Expected for Two Separate Test Files", "[ASSIGNMEN
         REQUIRE(check21 == 1);
         REQUIRE(mapToCompress2['q']=="");
     }
+
+    string outputBuffer1 = "";
+    for(const char &c : charactersToMap1){
+        outputBuffer1 += mapToCompress1[c];
+    }
+    hTree1.writeCodeTableToFile(mapToCompress1, outputBuffer1, "test1_Output", "./TestOutput/");
+
+    string outputBuffer2 = "";
+    for(const char &c : charactersToMap2){
+        outputBuffer2 += mapToCompress2[c];
+    }
+    hTree2.writeCodeTableToFile(mapToCompress2, outputBuffer2, "test2_Output", "./TestOutput/");
+
+    SECTION("Check that Order of Encoded File is the same as the Order of the Input File (Can be Extended to Entire File)"){
+        char char1 = charactersToMap1[0];
+        string firstCode = mapToCompress1[char1];
+        string value1;
+        ifstream inputFile1("./TestOutput/test1_Output.txt");
+        inputFile1 >> value1;
+        inputFile1.close();
+        string test1String = value1.substr(0, firstCode.length());
+        int test1Integer = firstCode.compare(test1String); 
+        REQUIRE(test1Integer == 0); //0 indicates equality
+
+        char char2 = charactersToMap2[0];
+        string secondCode = mapToCompress2[char2];
+        string value2;
+        ifstream inputFile2("./TestOutput/test2_Output.txt");
+        inputFile2 >> value2;
+        inputFile2.close();
+        string test2String = value2.substr(0, secondCode.length());
+        int test2Integer = secondCode.compare(test2String); 
+        REQUIRE(test2Integer == 0); //0 indicates equality
+    }
+
 
 }

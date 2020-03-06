@@ -57,7 +57,7 @@ namespace SLDALE003{
             
             void buildCodeTable(unordered_map<char, string> &map, shared_ptr<SLDALE003::HuffmanNode> r, string bitString);
 
-            void writeCodeTableToFile(unordered_map<char, string> map, string outputBuffer, string outputFile);
+            void writeCodeTableToFile(unordered_map<char, string> map, string outputBuffer, string outputFile, string outputPath);
 
             double returnRatio(int size1, int size2);
     };
