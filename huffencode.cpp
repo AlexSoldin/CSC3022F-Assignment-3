@@ -18,6 +18,7 @@ using namespace std;
 int main(int argc, char * argv[]){
     string inputFile = argv[1];
     string outputFile = argv[2];
+    string outputPath = "./Output/";
 
     ifstream input(inputFile);
     char currentChar;
@@ -39,7 +40,7 @@ int main(int argc, char * argv[]){
     // for (auto & instance : map){
 	// cout << instance.first << ": " << instance.second << endl; 
     // }
-    cout << "\n";
+    //cout << "\n";
 
     ::SLDALE003::HuffmanTree hTree(map);
     hTree.buildTree();
@@ -54,22 +55,65 @@ int main(int argc, char * argv[]){
     // for (auto & instance : mapToCompress){
     //     cout << "Character: " <<instance.first << " has bit string: " << instance.second << endl; 
     // }
-    // cout << "\n";
+    cout << "\n";
 
     string outputBuffer = "";
     for(const char &currentChar : charactersToMap){
         outputBuffer+=mapToCompress[currentChar];
     }
     hTree.writeCodeTableToFile(mapToCompress, outputBuffer, outputFile);
-    cout << "Output File Generation Successful\n\n";
 
 
     double badCompression = hTree.returnRatio(outputBuffer.length(), charactersToMap.size());
     cout << "Compression Ratio Without Bit Packing is: " << badCompression << "\n\n";
 
-    /* Extra Credit */
-
+    /* Extra Credit - Part 1 */
+    int bufferLength = outputBuffer.length();
+    ofstream compressedOutputFile(outputPath+outputFile+"Compressed.txt",ios::binary);
     
+    int i = 0;
+    while(i<bufferLength){
+
+        char byte = 0;
+        string bits = "";
+
+        if(i+8 < bufferLength){
+            bits = outputBuffer.substr(i, i+8);
+        }
+        else{
+            bits = outputBuffer.substr(i, bufferLength);
+        }
+
+        for(int count = 0; count < 8; count++){
+            if(count < bits.length()){
+                byte |= (bits[count] & 1) << count;
+            }
+            else{
+                byte |= 1 << count;
+            }
+        }
+        compressedOutputFile.put(byte);
+        i+=8;
+    }
+
+    int pos = compressedOutputFile.tellp(); //returns the current “put” position of the pointer in the stream
+    int numberOfBytes = pos + 1;
+    int numberOfBits = numberOfBytes * 8;
+    compressedOutputFile.close();
+
+    ofstream compressedOutputHeader(outputPath+outputFile+"Compressed.hdr",ios::binary);
+    compressedOutputHeader << numberOfBits;
+    compressedOutputHeader.close();
+
+    double goodCompression = hTree.returnRatio(numberOfBytes, charactersToMap.size());
+    cout << "Compression Ratio With Bit Packing is: " << goodCompression << "\n\n";
+
+    cout << "This is " << badCompression/goodCompression << "x better than before\n\n"; 
+
+    /* Extra Credit - Part 2 */
+    ifstream compressedInputHeader(outputFile+"Compressed.hdr");
+
+
 
     return 0;
 }

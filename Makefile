@@ -9,7 +9,7 @@ clean:
 
 #	./huffencode <inputFile><output file>
 run: huffencode
-	./huffencode inputFileExample.txt outputFileExample.txt
+	./huffencode inputFileExample.txt outputFileExample
 
 test: tests
 	g++ -o tests.o tests.cpp --std=c++11
