@@ -107,7 +107,7 @@ int main(int argc, char * argv[]){
     double goodCompression = hTree.returnRatio(numberOfBytes, charactersToMap.size());
     cout << "Compression Ratio With Bit Packing is: " << goodCompression << "\n\n";
 
-    cout << "This is " << badCompression/goodCompression << "x better than before\n\n"; 
+    cout << "Improvement of using Bit Packing is: " << badCompression/goodCompression << "x\n\n"; 
 
     /* Extra Credit - Part 2 */
     ifstream compressedInputHeader(outputPath+outputFile+"Compressed.hdr");

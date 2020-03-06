@@ -137,5 +137,53 @@ TEST_CASE("Methods Perform as Expected for Two Separate Test Files", "[ASSIGNMEN
         REQUIRE(test2Integer == 0); //0 indicates equality
     }
 
+    int bufferLength = outputBuffer1.length();
+    ofstream compressedOutputFile("./TestOutput/test1_Output_Compressed.txt",ios::binary);
+    
+    int i = 0;
+    while(i<bufferLength){
+
+        char byte = 0;
+        string bits = "";
+
+        if(i+8 < bufferLength){
+            bits = outputBuffer1.substr(i, i+8);
+        }
+        else{
+            bits = outputBuffer1.substr(i, bufferLength);
+        }
+
+        for(int count = 0; count < 8; count++){
+            if(count < bits.length()){
+                byte |= (bits[count] & 1) << count;
+            }
+            else{
+                byte |= 1 << count;
+            }
+        }
+        compressedOutputFile.put(byte);
+        i+=8;
+    }
+
+    int pos = compressedOutputFile.tellp(); //returns the current “put” position of the pointer in the stream
+    int numberOfBytes = pos + 1;
+    int numberOfBitsOut = numberOfBytes * 8;
+    compressedOutputFile.close();
+
+    ofstream compressedOutputHeader("./TestOutput/test1_Output_Compressed.hdr",ios::binary);
+    compressedOutputHeader << numberOfBitsOut;
+    compressedOutputHeader.close();
+
+    SECTION("Check that Bit Packed Output File is Actually Smaller than Original Input File and Enconded File"){
+        int sizeOfInput = charactersToMap1.size();
+        int sizeOfEncoded = outputBuffer1.length();
+        int sizeOfBitPacked = numberOfBytes;
+
+        REQUIRE(sizeOfBitPacked < sizeOfInput);
+        REQUIRE(sizeOfBitPacked < sizeOfEncoded);
+    }
+
+    
+
 
 }
