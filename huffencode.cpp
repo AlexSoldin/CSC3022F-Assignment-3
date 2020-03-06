@@ -40,7 +40,7 @@ int main(int argc, char * argv[]){
     // for (auto & instance : map){
 	// cout << instance.first << ": " << instance.second << endl; 
     // }
-    //cout << "\n";
+    cout << "\n";
 
     ::SLDALE003::HuffmanTree hTree(map);
     hTree.buildTree();
@@ -62,7 +62,6 @@ int main(int argc, char * argv[]){
         outputBuffer+=mapToCompress[currentChar];
     }
     hTree.writeCodeTableToFile(mapToCompress, outputBuffer, outputFile);
-
 
     double badCompression = hTree.returnRatio(outputBuffer.length(), charactersToMap.size());
     cout << "Compression Ratio Without Bit Packing is: " << badCompression << "\n\n";
@@ -98,11 +97,11 @@ int main(int argc, char * argv[]){
 
     int pos = compressedOutputFile.tellp(); //returns the current “put” position of the pointer in the stream
     int numberOfBytes = pos + 1;
-    int numberOfBits = numberOfBytes * 8;
+    int numberOfBitsOut = numberOfBytes * 8;
     compressedOutputFile.close();
 
     ofstream compressedOutputHeader(outputPath+outputFile+"Compressed.hdr",ios::binary);
-    compressedOutputHeader << numberOfBits;
+    compressedOutputHeader << numberOfBitsOut;
     compressedOutputHeader.close();
 
     double goodCompression = hTree.returnRatio(numberOfBytes, charactersToMap.size());
@@ -111,9 +110,12 @@ int main(int argc, char * argv[]){
     cout << "This is " << badCompression/goodCompression << "x better than before\n\n"; 
 
     /* Extra Credit - Part 2 */
-    ifstream compressedInputHeader(outputFile+"Compressed.hdr");
+    ifstream compressedInputHeader(outputPath+outputFile+"Compressed.hdr");
+    int numberOfBitsIn;
+    compressedInputHeader >> numberOfBitsIn;
+    compressedInputHeader.close();
 
-
+    
 
     return 0;
 }

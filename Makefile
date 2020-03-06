@@ -7,9 +7,9 @@ huffencode.o: huffencode.cpp
 clean: 
 	@rm -f *.o huffencode tests
 
-#	./huffencode <inputFile><output file>
+#	./huffencode <inputFile> <output file base name>
 run: huffencode
-	./huffencode inputFileExample.txt outputFileExample
+	./huffencode input.txt output
 
 test: tests
 	g++ -o tests.o tests.cpp --std=c++11
