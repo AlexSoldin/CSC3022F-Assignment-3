@@ -183,7 +183,43 @@ TEST_CASE("Methods Perform as Expected for Two Separate Test Files", "[ASSIGNMEN
         REQUIRE(sizeOfBitPacked < sizeOfEncoded);
     }
 
-    
+    ifstream compressedInputHeader("./TestOutput/test1_Output_Compressed.hdr");
+    int numberOfBitsIn;
+    compressedInputHeader >> numberOfBitsIn;
+    compressedInputHeader.close();
+
+    ifstream compressedInputFile("./TestOutput/test1_Output_Compressed.txt");
+    string inputBuffer;
+    compressedInputFile >> inputBuffer;
+    compressedInputFile.close();
+
+    bitset<8> Byte;
+    string resultBitString;
+    string tempBitString;
+
+    i = 0;
+    while(i < numberOfBitsIn/8){
+        Byte = inputBuffer[i];
+        tempBitString = Byte.to_string();
+        string UndoBitPacking;
+        for(int j = tempBitString.length()-1; j >= 0; j--){
+            UndoBitPacking+=tempBitString[j];
+        }
+        resultBitString+=UndoBitPacking;
+        i++;
+    }
+
+    ofstream matching("./TestOutput/UnpackedCompressedOutput.txt", ios::binary);
+    matching << resultBitString;
+    matching.close();
+
+    SECTION("Bit Unpacking File is the Same Size as Original Encoded File"){
+        int lengthEncoded = numberOfBitsOut;
+        int legnthUnpacked = resultBitString.length();
+
+        REQUIRE(lengthEncoded == legnthUnpacked);
+    }
+
 
 
 }

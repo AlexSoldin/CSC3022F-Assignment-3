@@ -115,7 +115,30 @@ int main(int argc, char * argv[]){
     compressedInputHeader >> numberOfBitsIn;
     compressedInputHeader.close();
 
+    ifstream compressedInputFile(outputPath+outputFile+"Compressed.txt");
+    string inputBuffer;
+    compressedInputFile >> inputBuffer;
+    compressedInputFile.close();
 
+    bitset<8> Byte;
+    string resultBitString;
+    string tempBitString;
+
+    i = 0;
+    while(i < numberOfBitsIn/8){
+        Byte = inputBuffer[i];
+        tempBitString = Byte.to_string();
+        string UndoBitPacking;
+        for(int j = tempBitString.length()-1; j >= 0; j--){
+            UndoBitPacking+=tempBitString[j];
+        }
+        resultBitString+=UndoBitPacking;
+        i++;
+    }
+
+    ofstream matching(outputPath+"UnpackedCompressedOutput.txt", ios::binary);
+    matching << resultBitString;
+    matching.close();
 
     return 0;
 }
