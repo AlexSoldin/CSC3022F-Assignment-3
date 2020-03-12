@@ -40,7 +40,7 @@ int main(int argc, char * argv[]){
     // for (auto & instance : map){
 	// cout << instance.first << ": " << instance.second << endl; 
     // }
-    cout << "\n";
+    // cout << "\n";
 
     ::SLDALE003::HuffmanTree hTree(map);
     hTree.buildTree();
@@ -71,7 +71,7 @@ int main(int argc, char * argv[]){
     ofstream compressedOutputFile(outputPath+outputFile+"Compressed.txt",ios::binary);
     
     int i = 0;
-    while(i<bufferLength){
+    while(i<(bufferLength+7)/8){
 
         char byte = 0;
         string bits = "";
@@ -92,7 +92,7 @@ int main(int argc, char * argv[]){
             }
         }
         compressedOutputFile.put(byte);
-        i+=8;
+        i += 1;
     }
 
     int pos = compressedOutputFile.tellp(); //returns the current “put” position of the pointer in the stream
@@ -128,11 +128,13 @@ int main(int argc, char * argv[]){
     while(i < numberOfBitsIn/8){
         Byte = inputBuffer[i];
         tempBitString = Byte.to_string();
-        string UndoBitPacking;
+        //cout << tempBitString << " : ";
+        string undoBitPacking;
         for(int j = tempBitString.length()-1; j >= 0; j--){
-            UndoBitPacking+=tempBitString[j];
+            undoBitPacking += tempBitString[j];
         }
-        resultBitString+=UndoBitPacking;
+        //cout << undoBitPacking << endl;
+        resultBitString += undoBitPacking;
         i++;
     }
 
